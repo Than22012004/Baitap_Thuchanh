@@ -66,12 +66,19 @@ def xoa():
         {'id':delete_box.get()})
     delete_box.delete(0, END)
     conn.commit()
+    messagebox.showinfo("Thông báo", "Đã xóa!")
     conn.close()
+    truy_van()
 
 def cap_nhat():
     conn = sqlite3.connect('students.db')
     c = conn.cursor()
     record_id = f_id_editor.get()
+    # Kiểm tra nếu ID đã bị thay đổi
+    if record_id != delete_box.get():
+        messagebox.showerror("Lỗi", "ID không thể chỉnh sửa!")
+        conn.close()
+        return  # Dừng việc cập nhật nếu ID bị thay đổi
 
     c.execute("""UPDATE students SET
            masv = :masv,
@@ -98,8 +105,6 @@ def cap_nhat():
     # Cập nhật lại danh sách bản ghi sau khi chỉnh sửa
     truy_van()
 
-
-
 def truy_van():
     #xoa di cac du lieu trong treeview
     for row in tree.get_children():
@@ -107,35 +112,42 @@ def truy_van():
     # Kết nối tới db
     conn = sqlite3.connect('students.db')
     c = conn.cursor()
-    c.execute('''
-           CREATE TABLE students(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                masv text,
-                first_name text,
-                last_name text,
-                malop text,
-                namhoc text,
-                dtb text
-            )
-        '''
-              )
+    # c.execute('''
+    #        CREATE TABLE students(
+    #             id INTEGER PRIMARY KEY AUTOINCREMENT,
+    #             masv text,
+    #             first_name text,
+    #             last_name text,
+    #             malop text,
+    #             namhoc text,
+    #             dtb text
+    #         )
+    #     '''
+    #           )
     c.execute("SELECT oid, * FROM students")
     record = c.fetchall()
 
     #hien thi du lieu
     for r in record:
-        tree.insert("" , END,values=(r[0], r[1],r[2]))
+        tree.insert("" , END,values=(r[0],r[2],r[3],r[4],r[5],r[6],r[7]))
 def chinh_sua():
     global editor
     editor = Tk()
     editor.title('Cập nhật bản ghi')
     editor.geometry("400x300")
 
-    conn = sqlite3.connect('info.db')
+    conn = sqlite3.connect('students.db')
     c = conn.cursor()
     record_id = delete_box.get()
     c.execute("SELECT * FROM students WHERE id=:id", {'id': record_id})
     records = c.fetchall()
+    # Nếu không có bản ghi nào với ID đã nhập, thông báo lỗi
+    if not records:
+        messagebox.showerror("Lỗi", "Mòi bạn điền lại ID!!!")
+        conn.close()
+        return
+
+
 
     global f_id_editor,masv_editor, f_name_editor, l_name_editor, malop_editor, namhoc_editor, dtb_editor
 
@@ -179,8 +191,11 @@ def chinh_sua():
         namhoc_editor.insert(0, record[5])
         dtb_editor.insert(0, record[6])
 
+    #f_id_editor.config(state='disabled')
+
+
     edit_btn = Button(editor, text="Lưu bản ghi", command=cap_nhat)
-    edit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=145)
+    edit_btn.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=145)
 
 # Khung cho các ô nhập liệu
 input_frame = Frame(root)
@@ -238,7 +253,7 @@ tree_frame = Frame(root)
 tree_frame.pack(pady=10)
 
 columns = ("id", "masv", "first_name", "last_name", "malop", "namhoc", "dtb")
-tree = ttk.Treeview(tree_frame, columns=columns, show="headings", height=8)
+tree = ttk.Treeview(tree_frame, columns=columns, show="headings", height=7)
 tree.pack()
 
 # Định nghĩa tiêu đề cho các cột
