@@ -17,19 +17,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 
 #Tao DataFrame rong
 d = pd.DataFrame({'band_name': [], 'years_active': []})
-# Kết nối tới db
-# conn = sqlite3.connect('musician.db')
-# c = conn.cursor()
-# c.execute('''
-#     CREATE TABLE musicans(
-#          id INTEGER PRIMARY KEY AUTOINCREMENT,
-#          ban_name text,
-#          year_active text
-#      )
-#  '''
-#        )
-# c.execute("SELECT oid, * FROM musicans")
-# record = c.fetchall()
+
 
 # Ham lay tt tung hoa si
 def get_musicans_info(link):
