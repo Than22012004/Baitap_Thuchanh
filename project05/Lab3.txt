@@ -1,0 +1,401 @@
+use tiktok
+switched to db tiktok
+db.users.insertMany([
+    { user_id: 1, username: "user1", full_name: "Nguyen Van A", followers: 1500, following: 200 },
+    { user_id: 2, username: "user2", full_name: "Tran Thi B", followers: 2000, following: 300 },
+    { user_id: 3, username: "user3", full_name: "Le Van C", followers: 500, following: 100 }
+])
+
+
+db.videos.insertMany([
+    { video_id: 1, user_id: 1, title: "Video 1", views: 10000, likes: 500, created_at: new Date("2024-01-01") },
+    { video_id: 2, user_id: 2, title: "Video 2", views: 20000, likes: 1500, created_at: new Date("2024-01-05") },
+    { video_id: 3, user_id: 3, title: "Video 3", views: 5000, likes: 200, created_at: new Date("2024-01-10") }
+])
+db.videos.find().sort ({views : -1}).limit(1)
+local
+
+users
+mongosh: facebookdata
+facebookdata
+
+>_MONGOSH
+
+use facebookdata
+switched to db facebookdata
+db["users"].find()
+{
+  _id: ObjectId('670c9bcfe480eaa79d86b021'),
+  user_id: 1,
+  name: 'Nguyen Van A',
+  email: 'a@gmail.com',
+  age: 25
+}
+{
+  _id: ObjectId('670c9bcfe480eaa79d86b022'),
+  user_id: 2,
+  name: 'Tran Thi B',
+  email: 'b@gmail.com',
+  age: 30
+}
+{
+  _id: ObjectId('670c9bcfe480eaa79d86b023'),
+  user_id: 3,
+  name: 'Le Van C',
+  email: 'c@gmail.com',
+  age: 22
+}
+db.users.updateMany()
+MongoshInvalidInputError: [COMMON-10001] Missing required argument at position 0 (Collection.updateMany)
+db.users.updateMany(
+	{content:{$exist:true}},{$set:},{}
+)
+SyntaxError: Unexpected token (2:31)
+
+  1 | db.users.updateMany(
+> 2 | 	{content:{$exist:true}},{$set:},{}
+    | 	                              ^
+  3 | )
+db.users.updateMany(
+{content:{$exist:true}},
+  [
+		{
+				$set: {"content":{$concat:["$content", "!"]}}
+		}
+	]
+)
+MongoServerError: unknown operator: $exist
+db.posts.deleteMany(
+  {
+    {user_id:2}
+	}
+)
+SyntaxError: Unexpected token (3:4)
+
+  1 | db.posts.deleteMany(
+  2 |   {
+> 3 |     {user_id:2}
+    |     ^
+  4 | 	}
+  5 | )
+db.posts.deleteOne(
+  {
+    {user_id:2}
+	}
+)
+SyntaxError: Unexpected token (3:4)
+
+  1 | db.posts.deleteOne(
+  2 |   {
+> 3 |     {user_id:2}
+    |     ^
+  4 | 	}
+  5 | )
+use driverManagement
+switched to db driverManagement
+db.files.insertMany([
+    { file_id: 1, name: "Report.pdf", size: 2048, owner: "Nguyen Van A", created_at: new Date("2024-01-10"), shared: false },
+    { file_id: 2, name: "Presentation.pptx", size: 5120, owner: "Tran Thi B", created_at: new Date("2024-01-15"), shared: true },
+    { file_id: 3, name: "Image.png", size: 1024, owner: "Le Van C", created_at: new Date("2024-01-20"), shared: false },
+    { file_id: 4, name: "Spreadsheet.xlsx", size: 3072, owner: "Pham Van D", created_at: new Date("2024-01-25"), shared: true },
+    { file_id: 5, name: "Notes.txt", size: 512, owner: "Nguyen Thi E", created_at: new Date("2024-01-30"), shared: false }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('670dc452553883cec8ae69a8'),
+    '1': ObjectId('670dc452553883cec8ae69a9'),
+    '2': ObjectId('670dc452553883cec8ae69aa'),
+    '3': ObjectId('670dc452553883cec8ae69ab'),
+    '4': ObjectId('670dc452553883cec8ae69ac')
+  }
+}
+db.files.find()
+{
+  _id: ObjectId('670dc452553883cec8ae69a8'),
+  file_id: 1,
+  name: 'Report.pdf',
+  size: 2048,
+  owner: 'Nguyen Van A',
+  created_at: 2024-01-10T00:00:00.000Z,
+  shared: false
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69a9'),
+  file_id: 2,
+  name: 'Presentation.pptx',
+  size: 5120,
+  owner: 'Tran Thi B',
+  created_at: 2024-01-15T00:00:00.000Z,
+  shared: true
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69aa'),
+  file_id: 3,
+  name: 'Image.png',
+  size: 1024,
+  owner: 'Le Van C',
+  created_at: 2024-01-20T00:00:00.000Z,
+  shared: false
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69ab'),
+  file_id: 4,
+  name: 'Spreadsheet.xlsx',
+  size: 3072,
+  owner: 'Pham Van D',
+  created_at: 2024-01-25T00:00:00.000Z,
+  shared: true
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69ac'),
+  file_id: 5,
+  name: 'Notes.txt',
+  size: 512,
+  owner: 'Nguyen Thi E',
+  created_at: 2024-01-30T00:00:00.000Z,
+  shared: false
+}
+db.files.find({ size: { $te: 2000 } })
+MongoServerError[BadValue]: unknown operator: $te
+db.files.find({ size: { $gte: 2000 } })
+{
+  _id: ObjectId('670dc452553883cec8ae69a8'),
+  file_id: 1,
+  name: 'Report.pdf',
+  size: 2048,
+  owner: 'Nguyen Van A',
+  created_at: 2024-01-10T00:00:00.000Z,
+  shared: false
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69a9'),
+  file_id: 2,
+  name: 'Presentation.pptx',
+  size: 5120,
+  owner: 'Tran Thi B',
+  created_at: 2024-01-15T00:00:00.000Z,
+  shared: true
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69ab'),
+  file_id: 4,
+  name: 'Spreadsheet.xlsx',
+  size: 3072,
+  owner: 'Pham Van D',
+  created_at: 2024-01-25T00:00:00.000Z,
+  shared: true
+}
+db.files.find({share:true})
+db.files.find({share: true})
+db.files.find({shared: true})
+{
+  _id: ObjectId('670dc452553883cec8ae69a9'),
+  file_id: 2,
+  name: 'Presentation.pptx',
+  size: 5120,
+  owner: 'Tran Thi B',
+  created_at: 2024-01-15T00:00:00.000Z,
+  shared: true
+}
+{
+  _id: ObjectId('670dc452553883cec8ae69ab'),
+  file_id: 4,
+  name: 'Spreadsheet.xlsx',
+  size: 3072,
+  owner: 'Pham Van D',
+  created_at: 2024-01-25T00:00:00.000Z,
+  shared: true
+}
+db.files.aggregate(
+[{$group:{_id:"$owner",count:{$sum : 1}}}]
+)
+{
+  _id: 'Tran Thi B',
+  count: 1
+}
+{
+  _id: 'Nguyen Van A',
+  count: 1
+}
+{
+  _id: 'Pham Van D',
+  count: 1
+}
+{
+  _id: 'Nguyen Thi E',
+  count: 1
+}
+{
+  _id: 'Le Van C',
+  count: 1
+}
+db.files.insertOne({ file_id: 1, name: "Report.doc", size: 2078, owner: "Nguyen Van A", created_at: new Date("2024-01-10"), shared: false })
+{
+  acknowledged: true,
+  insertedId: ObjectId('670dc777553883cec8ae69ad')
+}
+db.files.aggregate(
+[{$group:{_id:"$owner",count:{$sum : 1}}}]
+)
+{
+  _id: 'Pham Van D',
+  count: 1
+}
+{
+  _id: 'Nguyen Van A',
+  count: 2
+}
+{
+  _id: 'Nguyen Thi E',
+  count: 1
+}
+{
+  _id: 'Tran Thi B',
+  count: 1
+}
+{
+  _id: 'Le Van C',
+  count: 1
+}
+db.files.updateOne({files_id:1,shared:true})
+MongoInvalidArgumentError: Update document requires atomic operators
+db.files.deleteMany({size{$gte :5000}})
+SyntaxError: Unexpected token, expected "," (1:25)
+
+> 1 | db.files.deleteMany({size{$gte :5000}})
+    |                          ^
+db.files.deleteMany({size :{$gte :5000}})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+use tiktok
+switched to db tiktok
+db.users.insertMany([
+    { user_id: 1, username: "user1", full_name: "Nguyen Van A", followers: 1500, following: 200 },
+    { user_id: 2, username: "user2", full_name: "Tran Thi B", followers: 2000, following: 300 },
+    { user_id: 3, username: "user3", full_name: "Le Van C", followers: 500, following: 100 }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('670dc932553883cec8ae69ae'),
+    '1': ObjectId('670dc932553883cec8ae69af'),
+    '2': ObjectId('670dc932553883cec8ae69b0')
+  }
+}
+db.videos.insertMany([
+    { video_id: 1, user_id: 1, title: "Video 1", views: 10000, likes: 500, created_at: new Date("2024-01-01") },
+    { video_id: 2, user_id: 2, title: "Video 2", views: 20000, likes: 1500, created_at: new Date("2024-01-05") },
+    { video_id: 3, user_id: 3, title: "Video 3", views: 5000, likes: 200, created_at: new Date("2024-01-10") }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('670dc93e553883cec8ae69b1'),
+    '1': ObjectId('670dc93e553883cec8ae69b2'),
+    '2': ObjectId('670dc93e553883cec8ae69b3')
+  }
+}
+db.users.find()
+{
+  _id: ObjectId('670dc932553883cec8ae69ae'),
+  user_id: 1,
+  username: 'user1',
+  full_name: 'Nguyen Van A',
+  followers: 1500,
+  following: 200
+}
+{
+  _id: ObjectId('670dc932553883cec8ae69af'),
+  user_id: 2,
+  username: 'user2',
+  full_name: 'Tran Thi B',
+  followers: 2000,
+  following: 300
+}
+{
+  _id: ObjectId('670dc932553883cec8ae69b0'),
+  user_id: 3,
+  username: 'user3',
+  full_name: 'Le Van C',
+  followers: 500,
+  following: 100
+}
+db.videos.find({sort :{view : -1}}).limit(1)
+db.videos.find()
+{
+  _id: ObjectId('670dc93e553883cec8ae69b1'),
+  video_id: 1,
+  user_id: 1,
+  title: 'Video 1',
+  views: 10000,
+  likes: 500,
+  created_at: 2024-01-01T00:00:00.000Z
+}
+{
+  _id: ObjectId('670dc93e553883cec8ae69b2'),
+  video_id: 2,
+  user_id: 2,
+  title: 'Video 2',
+  views: 20000,
+  likes: 1500,
+  created_at: 2024-01-05T00:00:00.000Z
+}
+{
+  _id: ObjectId('670dc93e553883cec8ae69b3'),
+  video_id: 3,
+  user_id: 3,
+  title: 'Video 3',
+  views: 5000,
+  likes: 200,
+  created_at: 2024-01-10T00:00:00.000Z
+}
+db.videos.find({sort :{views : -1}}).limit(1)
+db.videos.find()sort (:{views : -1}).limit(1)
+SyntaxError: Missing semicolon. (1:16)
+
+> 1 | db.videos.find()sort (:{views : -1}).limit(1)
+    |                 ^
+db.videos.find()sort ({views : -1}).limit(1)
+SyntaxError: Missing semicolon. (1:16)
+
+> 1 | db.videos.find()sort ({views : -1}).limit(1)
+    |                 ^
+db.videos.find().sort ({views : -1}).limit(1)
+{
+  _id: ObjectId('670dc93e553883cec8ae69b2'),
+  video_id: 2,
+  user_id: 2,
+  title: 'Video 2',
+  views: 20000,
+  likes: 1500,
+  created_at: 2024-01-05T00:00:00.000Z
+}
+db.users.find({user_id:1})
+{
+  _id: ObjectId('670dc932553883cec8ae69ae'),
+  user_id: 1,
+  username: 'user1',
+  full_name: 'Nguyen Van A',
+  followers: 1500,
+  following: 200
+}
+db.users.find({username:'user1'})
+
+
+db.videos.aggregate([
+  {
+     	$group : { _id: null , averageLikes : {$avg : '$likes'}}
+	}
+])
+
+
+db.users.find({followers : {$gt : 1000}})
+
+
+db.users.updateOne({user_id :1}, {$set :{followers : 2000}})
+
+
+db.videos.deleteOne({video_id: 3})

@@ -130,6 +130,6 @@ for letter in string.ascii_uppercase:  # Duyệt qua các chữ cái từ A đ�
         if painter:
             d = pd.concat([d, pd.DataFrame([painter])], ignore_index=True)
 
-file_name = 'Painters_All_World.xlsx'
+file_name = 'Painters.xlsx'
 d.to_excel(file_name, index=False)
 print('DataFrame đã được ghi vào file Excel thành công!!!!.')
