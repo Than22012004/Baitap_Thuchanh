@@ -4,17 +4,59 @@ import pandas as pd
 from concurrent.futures import ThreadPoolExecutor
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.expected_conditions import none_of
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-import sqlite3
+
 #cau hinh chrom de chay nen
 chrome_options = Options()
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
 
+# Tao DataFrame rong
+d = pd.DataFrame({'band_name': [], 'years_active': []})
+
+
+# Ham lay tt tung hoa si
+def get_musicans_info(link):
+    try:
+        # Khoi tao webdriver
+        driver = webdriver.Chrome(options=chrome_options)
+
+        # mo trang
+        driver.get(link)
+
+        # Doi trang tai va dam bao the <h1> (ten ban nhac) xuat hien
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
+
+        # Lay ten ban nhac
+        try:
+            name = driver.find_element(By.TAG_NAME, "h1").text
+        except:
+            name = ""
+
+        # Lấy năm hoạt động
+        try:
+            years_active_element = driver.find_elements(By.XPATH,
+                                                       '/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/table[2]/tbody/tr[4]/td')
+            years_active_element = re.findall(r'(\d{4}(?:\s?–\s?\d{4}|present)?)', years_active_element).text
+        except:
+            years_active_element = ""
+
+
+
+        # Tao dictionary chua tt ban nhac
+        musicians = {'band_name': name, 'years_active': years_active_element}
+
+        return musicians
+
+    except Exception as e:
+        print(f"Lỗi khi truy cập {link}: {e}")
+        return None
+
+    finally:
+        driver.quit()
 
 
 def get_musician_links():
@@ -79,75 +121,24 @@ def get_musician_links():
     return links  # Trả về danh sách các liên kết nhạc sĩ
 
 
-#. Tạo cơ sở dữ liệu
-conn = sqlite3.connect('musicians.db')
-c = conn.cursor()
-try:
-    c.execute('''
-        CREATE TABLE musicians (
-            id integer primary key autoincrement,
-            name text,
-            years_active text
-        )
-    ''')
-except Exception as e:
-    print(e)
-
-def them(name, years_active):
-    conn = sqlite3.connect('musicians.db')
-    c = conn.cursor()
-    # Them vao co so du lieu
-    c.execute('''
-        INSERT INTO musicians(name, years_active)
-        VALUES (:name, :years_active)
-    ''',
-      {
-          'name': name,
-          'years_active': years_active
-      })
-    conn.commit()
-    conn.close()
-
-def get_musicans_info(link):
-    try:
-        # Khoi tao webdriver
-        driver = webdriver.Chrome(options=chrome_options)
-
-        # mo trang
-        driver.get(link)
-
-        # Doi trang tai va dam bao the <h1> (ten ban nhac) xuat hien
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "h1")))
-
-        # Lay ten ban nhac
-        try:
-            name = driver.find_element(By.TAG_NAME, "h1").text
-        except:
-            name = ""
-
-        # Lấy năm hoạt động
-        try:
-            years_active_element = driver.find_element(By.XPATH,
-                                                       '//span[contains(text(),"Years active")]/parent::*/following-sibling::td')
-            years_active = years_active_element.text
-        except:
-            years_active = ""
-
-        them(name,years_active)
-        return name, years_active
-
-    except Exception as e:
-        print(f"Lỗi khi truy cập {link}: {e}")
-        return None
-
-    finally:
-        driver.quit()
 
 
 
+# su dung ThreadPoolExecutorde thu thap thong tin song song
+#for letter in string.ascii_uppercase:  # Duyệt qua các chữ cái từ A đến Z
+    #print(f"Đang xử lý các họa sĩ bắt đầu với '{letter}'")
 musician_links = get_musician_links()
 print(f"Thu thập được {len(musician_links)} ")
-#
+
 # su dung ThreadPoolExecutorde xu li cac thong tin song song
 with ThreadPoolExecutor(max_workers=2) as executor:
     results = list(executor.map(get_musicans_info, musician_links))
+
+# them ket qua vao DataFrame
+for musicians in results:
+    if musicians:
+        d = pd.concat([d, pd.DataFrame([musicians])], ignore_index=True)
+
+file_name = 'musician1.xlsx'
+d.to_excel(file_name, index=False)
+print('DataFrame đã được ghi vào file Excel thành công!!!!.')

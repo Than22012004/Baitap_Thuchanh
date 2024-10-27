@@ -58,6 +58,7 @@ def them():
 def xoa():
     #ketnoi va lay dl
     conn = sqlite3.connect('students.db')
+
     c = conn.cursor()
     c.execute('''
         DELETE FROM
@@ -66,8 +67,15 @@ def xoa():
         {'id':delete_box.get()})
     delete_box.delete(0, END)
     conn.commit()
+    records = c.fetchall()
+
+    # Nếu không có bản ghi nào với ID đã nhập, thông báo lỗi
     messagebox.showinfo("Thông báo", "Đã xóa!")
     conn.close()
+
+    if not records:
+        messagebox.showerror("Lỗi", "ID khong ton tai!!!")
+        conn.close()
     truy_van()
 
 def cap_nhat():

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="915300ac-e6f2-4142-88c2-5088ea942bbf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Git/RR_git2/RecapRepo/file2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/description" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/applypatch-msg.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/commit-msg.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/fsmonitor-watchman.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/post-update.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/pre-applypatch.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/pre-commit.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/pre-merge-commit.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/pre-push.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/pre-rebase.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/pre-receive.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/prepare-commit-msg.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/push-to-checkout.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/sendemail-validate.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/hooks/update.sample" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/info/exclude" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/1f/2189bc6396228d6d47fd77d0f91bc71defbf6b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/21/bcdd80b7cf116f2d771836351e6d8c779230dd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/3d/829987d2e1944d19ef4aa30688e88a2066eda3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/7b/57bd29ea8afbdeb9bac64cf7074f4b531492a8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/7c/ea809e9d496be7e26dc7a42a7685786fec6e34" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/7d/585f7d7d9b264ebb95bd26c805c6c859d77f4e" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/94/99276bc2b76e56005f1630656b20f5a68cea50" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/99/03cadd2813cf6b5ff8c9b9936dda356e9a8dc3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/objects/aa/9565bd248b1308c92342d3a624c3e9e06ff187" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/refs/heads/feature1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/CentralRepo/refs/heads/master" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/Dev1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RR_git1/Dev2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scrapy/Ds_sanpham2.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scrapy/bt1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scrapy/bt2.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scrapy/bt3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scrapy/bt4.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scrapy/bt4c.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="2nlw0Lm4dbwLBCQMOSSgBEWaEYw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-884f5ed5d46b-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.22855.92" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="915300ac-e6f2-4142-88c2-5088ea942bbf" name="Changes" comment="" />
+      <created>1729560746384</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729560746384</updated>
+    </task>
+    <servers />
+  </component>
+</project>
